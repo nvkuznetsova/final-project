@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getAllPokemons, catchPokemon } from '../../routes/routes';
 import { Link } from 'react-router-dom';
-import path from 'path';
 
 class Main extends Component {
     constructor() {
@@ -12,6 +11,7 @@ class Main extends Component {
             name: '',
             pokemons: [],
             tmp: [],
+            load: 50,
             hasMore: true
         }
     }
@@ -47,9 +47,9 @@ class Main extends Component {
             this.setState({ hasMore: false });
             return;
         }
-        const load = 50;
+
         this.setState({
-            tmp: this.state.tmp.concat(this.state.pokemons.splice(0, load)),
+            tmp: this.state.tmp.concat(this.state.pokemons.splice(0, this.state.load)),
         });
     }
 
@@ -72,7 +72,7 @@ class Main extends Component {
                         {this.state.tmp.map((poke, i) => (
                             <div className="card bg-light mb-3 border-primary shadow-sm mx-auto" key={i}>
                                 <Link to={`/pokemon-card/${poke.id}`}>
-                                    <img className="card-img-top img-fluid pokeImg" src={path.join(__dirname, `pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)} alt="pokemon" />
+                                    <img className="card-img-top img-fluid pokeImg" src={(`../../pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)} alt="pokemon" />
                                 </Link>
                                 <div className="card-body">
                                     <p className="card-text text-capitalize">#{poke.id} {poke.name} </p>

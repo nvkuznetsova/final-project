@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getCaught } from '../../routes/routes';
-import path from 'path';
 
 class PokeCollection extends Component {
     constructor() {
@@ -64,7 +63,7 @@ class PokeCollection extends Component {
                     {this.state.tmp.map((poke, i) => (
                         <div className="card bg-light mb-3 border-success shadow-sm" key={i}>
                             <Link to={`/pokemon-card/${poke.id}`} >
-                                <img className="card-img-top img-fluid pokeImg" src={path.join(__dirname, `pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)} alt="pokemon" />
+                                <img className="card-img-top img-fluid pokeImg" src={(`../../pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)} alt="pokemon" />
                             </Link>
                             <div className="card-body">
                                 <p className="card-text text-capitalize">#{poke.id} {poke.name}</p>
