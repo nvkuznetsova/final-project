@@ -3,6 +3,7 @@ const URL = 'http://localhost:3000';
 
 //All pokemons
 export const getAllPokemons = () => {
+    debugger;
     return axios
             .get(`${URL}/pokemons/?_embed=caught`, {
                 headers: {'Content-Type' : 'application/json'}

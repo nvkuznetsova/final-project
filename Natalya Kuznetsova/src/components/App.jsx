@@ -1,5 +1,3 @@
-//import Router here
-//MainPage should load (navlinks prop?)
 import React from 'react';
 import { Switch, Route} from 'react-router-dom';
 import Main from './pages/MainPage';
@@ -12,12 +10,12 @@ const App = () => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-sm-12 col-md-12 mx-auto">
-                    <Route component={ Navbar }/>
+                    <Navbar />
                     <h1 className="text-center text-uppercase mt-3">Pokedex</h1>
                     <Switch>
                         <Route exact path='/' component={Main} />
-                        <Route exact path='/collection' component={PokeCollection} />
-                        <Route exact path='/pokemon-card/:id' component={PokemonPage} />
+                        <Route path='/collection' component={PokeCollection} />
+                        <Route path='/pokemon-card/:id' component={PokemonPage} />
                     </Switch>
                 </div>
             </div>
