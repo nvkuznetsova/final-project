@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getAllPokemons, catchPokemon } from '../../routes/routes';
-import { Link } from 'react-router-dom';
+import CardAll from '../cards/cardAll';
+
 
 class Main extends Component {
     constructor() {
@@ -70,19 +71,13 @@ class Main extends Component {
                 >
                     <div className="d-flex justify-content-around align-items-center flex-wrap">
                         {this.state.tmp.map((poke, i) => (
-                            <div className="card bg-light mb-3 border-primary shadow-sm mx-auto" key={i}>
-                                <Link to={`/pokemon-card/${poke.id}`}>
-                                    <img className="card-img-top img-fluid pokeImg" src={(`../../pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)} alt="pokemon" />
-                                </Link>
-                                <div className="card-body">
-                                    <p className="card-text text-capitalize">#{poke.id} {poke.name} </p>
-                                    {(poke.caught.length > 0) ? 
-                                        <button href="#" className="btn btn-secondary btn-block btn-lg" disabled>You caught me!</button>
-                                    :
-                                        <button href="#" className="btn btn-primary btn-block btn-lg" onClick={this.onCatch.bind(this, poke)}>Catch me!</button>
-                                    }
-                                </div>
-                            </div>
+                            <CardAll 
+                                link={`/pokemon-card/${poke.id}`}
+                                src={(`../../pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)}
+                                pokemon={poke}
+                                click={this.onCatch.bind(this, poke)}
+                                key={i}
+                            />
                         ))}
                     </div>
                 </InfiniteScroll>

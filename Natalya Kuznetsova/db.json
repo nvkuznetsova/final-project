@@ -3923,6 +3923,24 @@
       "name": "rapidash",
       "date": "31.01.2019",
       "pokemonId": 78
+    },
+    {
+      "id": 14,
+      "name": "kakuna",
+      "date": "02.02.2019",
+      "pokemonId": 14
+    },
+    {
+      "id": 61,
+      "name": "poliwhirl",
+      "date": "02.02.2019",
+      "pokemonId": 61
+    },
+    {
+      "id": 58,
+      "name": "growlithe",
+      "date": "02.02.2019",
+      "pokemonId": 58
     }
   ]
 }

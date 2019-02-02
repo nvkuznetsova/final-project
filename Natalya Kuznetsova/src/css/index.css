@@ -12,6 +12,10 @@ html {
     }
 }
 
+.infoImg {
+    max-width: 400px;
+}
+
 .logo {
     min-width: 40px;
     height: auto;
