@@ -1,52 +1,62 @@
 import React, { Component } from 'react';
-import { getCaught } from '../../routes/routes';
+import { getCaught, caughtLength } from '../../routes/routes';
 import CardCollection from '../cards/cardCollection';
+import InfiniteScroll from '../InfiniteScroll';
 
 class PokeCollection extends Component {
     constructor() {
         super();
         this.state = {
             pokemons: [],
-            tmp: [],
+            page: 1,
+            load: 20,
+            hasMore: true,
             length: 0,
-            hasMore: true
+            error: false,
+            isLoading: false
         }
     }
 
-    componentDidMount(){
-        this.getAllCaught();
+    componentDidMount(){   
+        caughtLength()
+            .then((length) => this.setState({length: length}))
+            .then(() => this.getAllCaught());
     }
 
     getAllCaught() {
-        getCaught().then(data => {
-            this.setState({
-                pokemons: [...data],
-                length: data.length
-            });
-        })
-        /*.then(() => {
-            if(this.state.pokemons.length !== 0) {
-                this.fetchMoreData();
-            }
-        })*/;  
-    }
-
-    fetchMoreData() {
-        if(this.state.pokemons.length === 0) {
-            this.setState({ hasMore: false });
+        if(this.state.pokemons.length === this.state.length) {
+            this.setState({hasMore: false});
             return;
         }
-        const load = 10;
-        this.setState({
-            tmp: [...this.state.tmp, ...this.state.pokemons.splice(0, load)]
-        });
+        getCaught(this.state.page, this.state.load).then(data => {
+            this.setState({
+                pokemons: [...this.state.pokemons, ...data],
+            });
+        })
+        .then(() => {
+            this.setState({
+                page: this.state.page + 1,
+                isLoading: false
+            }); 
+        })
+        .catch((err) => {
+            this.setState({
+                error: err.message,
+                isLoading: false,
+          })
+        });  
     }
 
     render() {
         return(
             <div className="col-sm-12 col-md-12">
                 <h3 className="text-md-left text-sm-center mt-3 mb-3">My Pokemons</h3>
-
+                <InfiniteScroll
+                    error={this.state.error}
+                    isLoading={this.state.isLoading}
+                    hasMore={this.state.hasMore}
+                    fetchData={this.getAllCaught.bind(this)}
+                >
                 <div className="d-flex justify-content-around align-items-center flex-wrap">
                     {this.state.pokemons.map((poke, i) => (
                         <CardCollection 
@@ -57,7 +67,7 @@ class PokeCollection extends Component {
                         />
                     ))}
                 </div>
-
+                </InfiniteScroll>
             </div>
         )
     }

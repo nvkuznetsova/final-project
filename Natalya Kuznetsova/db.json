@@ -3941,6 +3941,18 @@
       "name": "growlithe",
       "date": "02.02.2019",
       "pokemonId": 58
+    },
+    {
+      "id": 107,
+      "name": "hitmonchan",
+      "date": "02.02.2019",
+      "pokemonId": 107
+    },
+    {
+      "id": 63,
+      "name": "abra",
+      "date": "02.02.2019",
+      "pokemonId": 63
     }
   ]
 }
