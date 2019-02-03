@@ -5,16 +5,12 @@ import InfiniteScroll from '../InfiniteScroll';
 
 
 class Main extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            pokemons: [],
-            page: 1,
             load: 50,
             hasMore: true,
             length: 0,
-            error: false,
-            isLoading: false
         }
     }
 
@@ -34,28 +30,11 @@ class Main extends Component {
     }
 
     getAll() {
-        if(this.state.pokemons.length === this.state.length) {
+       /* if(this.props.pokemons.length === this.state.length) {
             this.setState({hasMore: false});
             return;
-        }
-        this.setState({isLoading: true})
-        getAllPokemons(this.state.page, this.state.load).then(data => {
-            this.setState({
-                pokemons: [...this.state.pokemons, ...data],
-            });
-        })
-        .then(() => {
-            this.setState({
-                page: this.state.page + 1,
-                isLoading: false
-            }); 
-        })
-        .catch((err) => {
-            this.setState({
-                error: err.message,
-                isLoading: false,
-          })
-        }); 
+        }*/
+        this.props.getAll(this.state.page, this.state.load);
     }
 
     render() {
@@ -63,13 +42,13 @@ class Main extends Component {
             <div className="col-md-12">
                 <h3 className="text-center text-md-left mt-3 mb-3">All Pokemons</h3>
                 <InfiniteScroll
-                    error={this.state.error}
-                    isLoading={this.state.isLoading}
+                    error={this.props.error}
+                    isLoading={this.props.isLoading}
                     hasMore={this.state.hasMore}
                     fetchData={this.getAll.bind(this)}
                 >
                     <div className="d-flex justify-content-around align-items-center flex-wrap">
-                        {this.state.pokemons.map((poke, i) => (
+                        {/*this.props.pokemons.map((poke, i) => (
                             <CardAll 
                                 link={`/pokemon-card/${poke.id}`}
                                 src={(`../../pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)}
@@ -77,7 +56,7 @@ class Main extends Component {
                                 click={this.onCatch.bind(this, poke)}
                                 key={i}
                             />
-                        ))}
+                        ))*/}
                         
                     </div>
                 </InfiniteScroll>

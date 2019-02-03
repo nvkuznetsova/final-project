@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route} from 'react-router-dom';
-import Main from './pages/MainPage';
+import Main from '../containers/pokemons';
 import PokeCollection from './pages/PokeCollection';
 import PokemonPage from './pages/PokemonPage';
 import Navbar from './Navbar';
