@@ -7,10 +7,11 @@ export const actionTypes = {
     ADD_PAGE: 'ADD_PAGE'
 }
 
-export const dataHasError = (bool) => {
+export const dataHasError = (bool, msg) => {
     return {
         type: actionTypes.DATA_HAS_ERROR,
-        error: bool
+        error: bool,
+        msg: msg
     };
 }
 
@@ -21,11 +22,10 @@ export const dataIsLoading = (bool) => {
     };
 }
 
-let num = 1;
-export const addPage = () => {
+export const addPage = (num = 1) => {
     return {
         type: actionTypes.ADD_PAGE,
-        page: num + 1
+        page: num 
     };
 }
 
@@ -42,12 +42,13 @@ export const getAll = (page, limit) => {
 
         getAllPokemons(page, limit)
             .then(pokemons => {
-                dispatch(dataLoadingSuccess(pokemons))
+                dispatch(dataLoadingSuccess(pokemons));
             })
             .then(() => dispatch(dataIsLoading(false)))
-            .then(() => dispatch(addPage()))
-            .catch(() => {
-                dispatch(dataHasError(true));
+            .then(() => dispatch(addPage(page+1)))
+            .catch((err) => {
+                console.log(err.message);
+                dispatch(dataHasError(true, err.message));
                 dispatch(dataIsLoading(false));
             });
     };

@@ -5,8 +5,8 @@ import { getAll } from '../actions/pokemons';
 const mapStateToProps = (state) => ({
     isLoading: state.pokemonsReducer.isLoading,
     error: state.pokemonsReducer.error,
+    pokemons: state.pokemonsReducer.pokemons,
     page: state.pokemonsReducer.page,
-    pokemons: state.pokemonsReducer.pokemons
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,4 +15,6 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main);
+
+export default MainContainer;

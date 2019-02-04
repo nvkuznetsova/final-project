@@ -2,23 +2,41 @@ import { actionTypes } from '../actions/pokemons';
 const initState = {
     isLoading: false,
     error: false,
-    page: 1,
-    pokemons: []
+    pokemons: [],
+    page: 1
 }
 
 const pokemonsReducer = (state = initState, action) => {
     switch(action.type) {
         case actionTypes.DATA_IS_LOADING:
-            return action.isLoading;
-        case actionTypes.DATA_HAS_ERROR:
-            return action.error;
-        case actionTypes.ADD_PAGE:
-            return action.page;
-        case actionTypes.DATA_LOADING_SUCCESS:
             return {
                 ...state,
-                pokemons: [...state.pokemons, ...action.pokemons]
+                isLoading: action.isLoading,
             }
+        case actionTypes.DATA_HAS_ERROR:
+            return {
+                error: action.error,
+                msg: action.msg,
+            }
+        case actionTypes.ADD_PAGE:
+        //debugger;
+           return {
+            ...state,
+            page: action.page
+        }
+        case actionTypes.DATA_LOADING_SUCCESS:
+            if(state.pokemons.length !== 0) {
+                return {
+                    ...state, 
+                    pokemons: [...state.pokemons, ...action.pokemons]
+                }
+            } else {
+                return {
+                    ...state, 
+                    pokemons: [...action.pokemons]
+                }
+            }
+            
         default:
             return state;
     }

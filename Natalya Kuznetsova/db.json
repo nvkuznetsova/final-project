@@ -3953,6 +3953,24 @@
       "name": "abra",
       "date": "02.02.2019",
       "pokemonId": 63
+    },
+    {
+      "id": 135,
+      "name": "jolteon",
+      "date": "04.02.2019",
+      "pokemonId": 135
+    },
+    {
+      "id": 133,
+      "name": "eevee",
+      "date": "04.02.2019",
+      "pokemonId": 133
+    },
+    {
+      "id": 134,
+      "name": "vaporeon",
+      "date": "04.02.2019",
+      "pokemonId": 134
     }
   ]
 }

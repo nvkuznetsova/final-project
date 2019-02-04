@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getAllPokemons, catchPokemon, allLength } from '../../routes/routes';
 import CardAll from '../cards/cardAll';
 import InfiniteScroll from '../InfiniteScroll';
+import PropTypes from 'prop-types';
 
 
 class Main extends Component {
@@ -34,7 +35,7 @@ class Main extends Component {
             this.setState({hasMore: false});
             return;
         }*/
-        this.props.getAll(this.state.page, this.state.load);
+        this.props.getAll(this.props.page, this.state.load);
     }
 
     render() {
@@ -48,7 +49,7 @@ class Main extends Component {
                     fetchData={this.getAll.bind(this)}
                 >
                     <div className="d-flex justify-content-around align-items-center flex-wrap">
-                        {/*this.props.pokemons.map((poke, i) => (
+                        {this.props.pokemons.map((poke, i) => (
                             <CardAll 
                                 link={`/pokemon-card/${poke.id}`}
                                 src={(`../../pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)}
@@ -56,7 +57,7 @@ class Main extends Component {
                                 click={this.onCatch.bind(this, poke)}
                                 key={i}
                             />
-                        ))*/}
+                        ))}
                         
                     </div>
                 </InfiniteScroll>
@@ -64,5 +65,13 @@ class Main extends Component {
         )
     }
 }
+
+/*Main.propTypes = {
+    getAll: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    error: PropTypes.bool.isRequired,
+    page: PropTypes.number.isRequired,
+    pokemons: PropTypes.array.isRequired
+  }*/
 
 export default Main;

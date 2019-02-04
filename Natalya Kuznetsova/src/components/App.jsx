@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route} from 'react-router-dom';
-import Main from '../containers/pokemons';
+import MainContainer from '../containers/pokemons';
 import PokeCollection from './pages/PokeCollection';
 import PokemonPage from './pages/PokemonPage';
 import Navbar from './Navbar';
@@ -13,7 +13,7 @@ const App = () => {
                     <Navbar />
                     <h1 className="text-center text-uppercase mt-3">Pokedex</h1>
                     <Switch>
-                        <Route exact path='/' component={Main} />
+                        <Route exact path='/' component={MainContainer} />
                         <Route path='/collection' component={PokeCollection} />
                         <Route path='/pokemon-card/:id' component={PokemonPage} />
                     </Switch>
