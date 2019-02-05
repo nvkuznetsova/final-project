@@ -3,7 +3,8 @@ const initState = {
     isLoading: false,
     error: false,
     pokemons: [],
-    page: 1
+    page: 1,
+    path: ''
 }
 
 const pokemonsReducer = (state = initState, action) => {
@@ -19,11 +20,23 @@ const pokemonsReducer = (state = initState, action) => {
                 msg: action.msg,
             }
         case actionTypes.ADD_PAGE:
-        //debugger;
            return {
             ...state,
             page: action.page
         }
+        case actionTypes.CHECK_PATH:
+            debugger;
+            if(state.path !== action.path) {
+                return {
+                    pokemons: [],
+                    page: 1,
+                    path: action.path
+                }
+            } else {
+                return {
+                    ...state
+                }
+            }
         case actionTypes.DATA_LOADING_SUCCESS:
             if(state.pokemons.length !== 0) {
                 return {

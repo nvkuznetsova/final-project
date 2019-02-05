@@ -2,9 +2,9 @@ import axios from 'axios';
 const URL = 'http://localhost:3000';
 
 //All pokemons
-export const getAllPokemons = (page, limit) => {
+export const getAllPokemons = (path, page, limit) => {
     return axios
-            .get(`${URL}/pokemons/?_embed=caught&_page=${page}&_limit=${limit}`, {
+            .get(`${URL}/${path}_page=${page}&_limit=${limit}`, { 
                 headers: {'Content-Type' : 'application/json'}
             })
             .then(res => {
@@ -16,7 +16,7 @@ export const getAllPokemons = (page, limit) => {
 }
 
 //Caught pokemons 
-export const getCaught = (page, limit) => {
+/*export const getCaught = (page, limit) => {
     return axios
             .get(`${URL}/caught?_page=${page}&_limit=${limit}`, {
                 headers: {'Content-Type' : 'application/json'}
@@ -27,7 +27,7 @@ export const getCaught = (page, limit) => {
             .catch((err) => {
                 return err
             });
-}
+}*/
 
 //Get pokemon info
 export const getPokemon = (id) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAllPokemons, catchPokemon, allLength } from '../../routes/routes';
+import { catchPokemon, allLength } from '../../routes/routes';
 import CardAll from '../cards/cardAll';
 import InfiniteScroll from '../InfiniteScroll';
 import PropTypes from 'prop-types';
@@ -31,11 +31,13 @@ class Main extends Component {
     }
 
     getAll() {
-       /* if(this.props.pokemons.length === this.state.length) {
+        if(this.props.pokemons.length === this.state.length) {
             this.setState({hasMore: false});
             return;
-        }*/
-        this.props.getAll(this.props.page, this.state.load);
+        }
+        const path = 'pokemons/?_embed=caught&';
+        this.props.checkPath(path);
+        this.props.getAll(this.props.path, this.props.page, this.state.load);
     }
 
     render() {

@@ -1,4 +1,4 @@
-import Main from '../components/pages/MainPage';
+import PokeCollection from '../components/pages/PokeCollection';
 import { connect } from 'react-redux';
 import { getAll, checkPath } from '../actions/pokemons';
 
@@ -13,9 +13,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         checkPath: (path) => dispatch(checkPath(path)),
-        getAll: (path, page, limit) => dispatch(getAll(path, page, limit))
+        getAllCaught: (path, page, limit) => dispatch(getAll(path, page, limit))
     };
 };
-
-const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main);
-export default MainContainer;
+const CollectionContainer = connect(mapStateToProps, mapDispatchToProps)(PokeCollection);
+export default CollectionContainer;

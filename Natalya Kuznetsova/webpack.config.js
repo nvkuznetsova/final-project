@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+require('@babel/polyfill');
 
 module.exports = {
     context: path.join(__dirname, 'src'),
-    entry: './index.js',
+    entry: ['@babel/polyfill', './index.js'],
 
     output: {
         filename: 'bundle.js',

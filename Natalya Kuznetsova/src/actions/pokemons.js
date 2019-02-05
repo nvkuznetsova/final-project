@@ -1,10 +1,11 @@
-import { getAllPokemons, catchPokemon } from '../routes/routes';
+import { getAllPokemons } from '../routes/routes';
 
 export const actionTypes = {
     DATA_IS_LOADING: 'DATA_IS_LOADING',
     DATA_HAS_ERROR: 'DATA_HAS_ERROR',
     DATA_LOADING_SUCCESS: 'DATA_LOADING_SUCCESS',
-    ADD_PAGE: 'ADD_PAGE'
+    ADD_PAGE: 'ADD_PAGE',
+    CHECK_PATH: 'CHECK_PATH'
 }
 
 export const dataHasError = (bool, msg) => {
@@ -36,11 +37,18 @@ export const dataLoadingSuccess = (pokemons) => {
     };
 }
 
-export const getAll = (page, limit) => {
+export const checkPath = (path) => {
+    return {
+        type: actionTypes.CHECK_PATH,
+        path
+    }
+}
+
+export const getAll = (path, page, limit) => {
     return (dispatch) => {
         dispatch(dataIsLoading(true));
-
-        getAllPokemons(page, limit)
+        
+        getAllPokemons(path, page, limit)
             .then(pokemons => {
                 dispatch(dataLoadingSuccess(pokemons));
             })
