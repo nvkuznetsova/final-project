@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { catchPokemon, allLength } from '../../routes/routes';
+import { catchPokemon } from '../../routes/routes';
 import CardAll from '../cards/cardAll';
 import InfiniteScroll from '../InfiniteScroll';
 import PropTypes from 'prop-types';
@@ -10,15 +10,12 @@ class Main extends Component {
         super(props);
         this.state = {
             load: 50,
-            hasMore: true,
-            length: 0,
         }
     }
 
     componentDidMount(){   
-        allLength()
-            .then((length) => this.setState({length: length}))
-            .then(() => this.getAll());
+        this.props.getLength();
+        this.getAll();
     }
 
     onCatch(poke, ev) {
@@ -31,13 +28,12 @@ class Main extends Component {
     }
 
     getAll() {
-        if(this.props.pokemons.length === this.state.length) {
-            this.setState({hasMore: false});
+        if(this.props.pokemons.length === this.props.size) {
+            this.props.hasMore(false);
             return;
         }
-        const path = 'pokemons/?_embed=caught&';
-        this.props.checkPath(path);
-        this.props.getAll(this.props.path, this.props.page, this.state.load);
+
+        this.props.getAll(this.props.page, this.state.load);
     }
 
     render() {
@@ -47,7 +43,7 @@ class Main extends Component {
                 <InfiniteScroll
                     error={this.props.error}
                     isLoading={this.props.isLoading}
-                    hasMore={this.state.hasMore}
+                    hasMore={this.props.hasMore}
                     fetchData={this.getAll.bind(this)}
                 >
                     <div className="d-flex justify-content-around align-items-center flex-wrap">

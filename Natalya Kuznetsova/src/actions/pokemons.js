@@ -1,11 +1,12 @@
-import { getAllPokemons } from '../routes/routes';
+import { getAllPokemons, allLength } from '../routes/routes';
 
 export const actionTypes = {
     DATA_IS_LOADING: 'DATA_IS_LOADING',
     DATA_HAS_ERROR: 'DATA_HAS_ERROR',
     DATA_LOADING_SUCCESS: 'DATA_LOADING_SUCCESS',
     ADD_PAGE: 'ADD_PAGE',
-    CHECK_PATH: 'CHECK_PATH'
+    SET_LENGTH: 'SET_LENGTH',
+    HAS_MORE: 'HAS_MORE'
 }
 
 export const dataHasError = (bool, msg) => {
@@ -37,18 +38,42 @@ export const dataLoadingSuccess = (pokemons) => {
     };
 }
 
-export const checkPath = (path) => {
+export const setLength = (size) => {
     return {
-        type: actionTypes.CHECK_PATH,
-        path
+        type: actionTypes.SET_LENGTH,
+        size
+    };
+}
+
+export const hasMore = (bool) => {
+    return {
+        type: actionTypes.HAS_MORE,
+        bool
+    };
+}
+
+export const getLength = () => {
+    return (dispatch) => {
+        dispatch(dataIsLoading(true));
+
+        allLength()
+            .then(size => {
+                dispatch(setLength(size))
+            })
+            .then(() => dispatch(dataIsLoading(false)))
+            .catch((err) => {
+                console.log(err.message);
+                dispatch(dataHasError(true, err.message));
+                dispatch(dataIsLoading(false));
+            });
     }
 }
 
-export const getAll = (path, page, limit) => {
+export const getAll = (page, limit) => {
     return (dispatch) => {
         dispatch(dataIsLoading(true));
         
-        getAllPokemons(path, page, limit)
+        getAllPokemons(page, limit)
             .then(pokemons => {
                 dispatch(dataLoadingSuccess(pokemons));
             })

@@ -4,7 +4,8 @@ const initState = {
     error: false,
     pokemons: [],
     page: 1,
-    path: ''
+    size: 1,
+    hasMore: true
 }
 
 const pokemonsReducer = (state = initState, action) => {
@@ -21,21 +22,18 @@ const pokemonsReducer = (state = initState, action) => {
             }
         case actionTypes.ADD_PAGE:
            return {
-            ...state,
-            page: action.page
-        }
-        case actionTypes.CHECK_PATH:
-            debugger;
-            if(state.path !== action.path) {
-                return {
-                    pokemons: [],
-                    page: 1,
-                    path: action.path
-                }
-            } else {
-                return {
-                    ...state
-                }
+                ...state,
+                page: action.page
+            }
+        case actionTypes.SET_LENGTH: 
+            return {
+                ...state,
+                size: action.size
+            }
+        case actionTypes.HAS_MORE: 
+            return {
+                ...state,
+                hasMore: action.bool
             }
         case actionTypes.DATA_LOADING_SUCCESS:
             if(state.pokemons.length !== 0) {

@@ -1,19 +1,21 @@
 import Main from '../components/pages/MainPage';
 import { connect } from 'react-redux';
-import { getAll, checkPath } from '../actions/pokemons';
+import { getAll, getLength, hasMore } from '../actions/pokemons';
 
 const mapStateToProps = (state) => ({
     isLoading: state.pokemonsReducer.isLoading,
     error: state.pokemonsReducer.error,
     pokemons: state.pokemonsReducer.pokemons,
     page: state.pokemonsReducer.page,
-    path: state.pokemonsReducer.path
+    size: state.pokemonsReducer.size,
+    hasMore: state.pokemonsReducer.hasMore
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        checkPath: (path) => dispatch(checkPath(path)),
-        getAll: (path, page, limit) => dispatch(getAll(path, page, limit))
+        hasMore: (bool) => dispatch(hasMore(bool)),
+        getLength: () => dispatch(getLength()),
+        getAll: (page, limit) => dispatch(getAll(page, limit))
     };
 };
 

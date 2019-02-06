@@ -21,9 +21,7 @@ class InfiniteScroll extends Component {
             <Fragment>
                 <div>{this.props.children}</div>
                 {this.props.error &&
-                    <div className="text-danger text-uppercase">
-                        {this.props.error}
-                    </div>
+                    <div className="text-danger text-uppercase">An error occured, sorry(</div>
                 }
                 {this.props.isLoading &&
                 <div className="d-block font-weight-bold text-center">Loading...</div>}
