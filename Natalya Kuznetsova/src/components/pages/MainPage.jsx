@@ -24,7 +24,7 @@ class Main extends Component {
         ev.target.classList.remove('btn-primary');
         ev.target.classList.add('btn-secondary');
         ev.target.textContent = 'You caught me!';
-        catchPokemon(poke);
+        this.props.catchPokemon(poke);
     }
 
     getAll() {

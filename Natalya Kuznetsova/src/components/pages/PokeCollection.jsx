@@ -33,8 +33,8 @@ class PokeCollection extends Component {
                 <div className="d-flex justify-content-around align-items-center flex-wrap">
                     {this.props.pokemons.map((poke, i) => (
                         <CardCollection 
-                            link={`/pokemon-card/${poke.id}`}
-                            src={(`../../pokemons/${(poke.id <= 720) ? poke.id : poke.id%100+1}.png`)}
+                            link={`/pokemon-card/${poke.pokemonId}`}
+                            src={(`../../pokemons/${(poke.pokemonId <= 720) ? poke.pokemonId : poke.pokemonId%100+1}.png`)}
                             pokemon={poke}
                             key={i}
                         />

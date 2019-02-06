@@ -1,13 +1,13 @@
-import { getAllPokemons, allLength } from '../routes/routes';
+import { getAllPokemons, allLength, catchPokemon } from '../routes/routes';
 
 export const actionTypes = {
     DATA_IS_LOADING: 'DATA_IS_LOADING',
     DATA_HAS_ERROR: 'DATA_HAS_ERROR',
     DATA_LOADING_SUCCESS: 'DATA_LOADING_SUCCESS',
     ADD_PAGE: 'ADD_PAGE',
-    SET_LENGTH: 'SET_LENGTH',
-    CATCH_POKE: 'CATCH_POKE'
+    SET_LENGTH: 'SET_LENGTH'
 }
+export const CATCH_POKE = 'CATCH_POKE';
 
 export const dataHasError = (bool, msg) => {
     return {
@@ -45,6 +45,13 @@ export const setLength = (size) => {
     };
 }
 
+export const catchPoke = (bool) => {
+    return {
+        type: CATCH_POKE,
+        isCaught: bool
+    }
+}
+
 export const getLength = () => {
     return (dispatch) => {
         dispatch(dataIsLoading(true));
@@ -78,4 +85,12 @@ export const getAll = (page, limit) => {
                 dispatch(dataIsLoading(false));
             });
     };
+}
+
+export const catchedPokemon = (poke) => {
+    return (dispatch) => {
+        dispatch(catchPoke(true));
+        catchPokemon(poke);
+        dispatch(catchPoke(false));       
+    }
 }

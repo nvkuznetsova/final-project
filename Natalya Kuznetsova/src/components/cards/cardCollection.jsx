@@ -9,7 +9,7 @@ const CardCollection = (props) => {
         <div className="card bg-light mb-3 border-success shadow-sm">
             <ImageLink link={props.link} src={props.src}/>
             <div className="card-body">
-                <TextName id={props.pokemon.id} name={props.pokemon.name}/>
+                <TextName id={props.pokemon.pokemonId} name={props.pokemon.name}/>
                 <TextCaught date={props.pokemon.date}/>
                 <BtnLink link={props.link} />
             </div>

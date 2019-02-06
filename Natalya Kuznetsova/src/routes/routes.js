@@ -18,7 +18,7 @@ export const getAllPokemons = (page, limit) => {
 //Caught pokemons 
 export const getCaught = (page, limit) => {
     return axios
-            .get(`${URL}/caught?_page=${page}&_limit=${limit}`, {
+            .get(`${URL}/caught?_page=${page}&_limit=${limit}&_sort=id&_order=desc`, {
                 headers: {'Content-Type' : 'application/json'}
             })
             .then(res => {
@@ -41,9 +41,10 @@ export const getPokemon = (id) => {
 }
 
 export const catchPokemon = (pokemon) => {
-    return axios
+    caughtLength().then(leng => {
+        return axios
             .post(`${URL}/caught`, 
-            { id: pokemon.id,
+            { id: leng + 1,
               name: pokemon.name,
               date: new Date().toLocaleDateString(),
               pokemonId: pokemon.id
@@ -52,6 +53,7 @@ export const catchPokemon = (pokemon) => {
             .then(res => {
                 return res.data;
             });
+    });
 }
 
 export const allLength = () => {

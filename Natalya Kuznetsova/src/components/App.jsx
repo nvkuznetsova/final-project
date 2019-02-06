@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route} from 'react-router-dom';
 import MainContainer from '../containers/pokemons';
 import CollectionContainer from '../containers/collection';
-import PokemonPage from './pages/PokemonPage';
+import PokemonContainer from '../containers/pokemon';
 import Navbar from './Navbar';
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
                     <Switch>
                         <Route exact path='/' component={MainContainer} />
                         <Route path='/collection' component={CollectionContainer} />
-                        <Route path='/pokemon-card/:id' component={PokemonPage} />
+                        <Route path='/pokemon-card/:id' component={PokemonContainer} />
                     </Switch>
                 </div>
             </div>

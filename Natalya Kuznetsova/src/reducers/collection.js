@@ -1,4 +1,5 @@
 import { actionTypes } from '../actions/collection';
+import { CATCH_POKE } from '../actions/pokemons';
 const initState = {
     isLoading: false,
     error: false,
@@ -48,7 +49,9 @@ const collectionReducer = (state = initState, action) => {
                     ...state, 
                     pokemons: [...action.pokemons]
                 }
-            }     
+            } 
+        case CATCH_POKE: 
+            return initState;    
         default:
             return state;
     }
