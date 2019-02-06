@@ -1,6 +1,6 @@
 import Main from '../components/pages/MainPage';
 import { connect } from 'react-redux';
-import { getAll, getLength, hasMore } from '../actions/pokemons';
+import { getAll, getLength } from '../actions/pokemons';
 
 const mapStateToProps = (state) => ({
     isLoading: state.pokemonsReducer.isLoading,
@@ -13,7 +13,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        hasMore: (bool) => dispatch(hasMore(bool)),
         getLength: () => dispatch(getLength()),
         getAll: (page, limit) => dispatch(getAll(page, limit))
     };

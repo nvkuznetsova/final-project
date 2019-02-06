@@ -1,4 +1,4 @@
-import { actionTypes } from '../actions/pokemons';
+import { actionTypes } from '../actions/collection';
 const initState = {
     isLoading: false,
     error: false,
@@ -8,29 +8,29 @@ const initState = {
     hasMore: true
 }
 
-const pokemonsReducer = (state = initState, action) => {
+const collectionReducer = (state = initState, action) => {
     switch(action.type) {
-        case actionTypes.DATA_IS_LOADING:
+        case actionTypes.COLLECTION_IS_LOADING:
             return {
                 ...state,
                 isLoading: action.isLoading,
             }
-        case actionTypes.DATA_HAS_ERROR:
+        case actionTypes.COLLECTION_HAS_ERROR:
             return {
                 error: action.error,
                 msg: action.msg,
             }
-        case actionTypes.ADD_PAGE:
+        case actionTypes.COLLECTION_ADD_PAGE:
            return {
                 ...state,
                 page: action.page
             }
-        case actionTypes.SET_LENGTH: 
+        case actionTypes.COLLECTION_LENGTH: 
             return {
                 ...state,
                 size: action.size
             }
-        case actionTypes.DATA_LOADING_SUCCESS:
+        case actionTypes.COLLECTION_LOADING_SUCCESS:
             if(state.pokemons.length !== 0) {
                 if(state.pokemons.length === state.size) {
                     return {
@@ -48,11 +48,10 @@ const pokemonsReducer = (state = initState, action) => {
                     ...state, 
                     pokemons: [...action.pokemons]
                 }
-            }
-            
+            }     
         default:
             return state;
     }
 }
 
-export default pokemonsReducer;
+export default collectionReducer;

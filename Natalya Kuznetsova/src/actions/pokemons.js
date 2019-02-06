@@ -6,7 +6,7 @@ export const actionTypes = {
     DATA_LOADING_SUCCESS: 'DATA_LOADING_SUCCESS',
     ADD_PAGE: 'ADD_PAGE',
     SET_LENGTH: 'SET_LENGTH',
-    HAS_MORE: 'HAS_MORE'
+    CATCH_POKE: 'CATCH_POKE'
 }
 
 export const dataHasError = (bool, msg) => {
@@ -42,13 +42,6 @@ export const setLength = (size) => {
     return {
         type: actionTypes.SET_LENGTH,
         size
-    };
-}
-
-export const hasMore = (bool) => {
-    return {
-        type: actionTypes.HAS_MORE,
-        bool
     };
 }
 

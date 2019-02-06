@@ -1,17 +1,20 @@
 import PokeCollection from '../components/pages/PokeCollection';
 import { connect } from 'react-redux';
-import {  } from '../actions/pokemons';
+import {  getCollectionLength, getAllCaught } from '../actions/collection';
 
 const mapStateToProps = (state) => ({
-    isLoading: state.pokemonsReducer.isLoading,
-    error: state.pokemonsReducer.error,
-    pokemons: state.pokemonsReducer.pokemons,
-    page: state.pokemonsReducer.page
+    isLoading: state.collectionReducer.isLoading,
+    error: state.collectionReducer.error,
+    pokemons: state.collectionReducer.pokemons,
+    page: state.collectionReducer.page,
+    size: state.collectionReducer.size,
+    hasMore: state.collectionReducer.hasMore
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllCaught: (path, page, limit) => dispatch(getAll(path, page, limit))
+        getLength: () => dispatch(getCollectionLength()),
+        getAllCaught: (page, limit) => dispatch(getAllCaught(page, limit))
     };
 };
 const CollectionContainer = connect(mapStateToProps, mapDispatchToProps)(PokeCollection);

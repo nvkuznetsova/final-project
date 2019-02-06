@@ -28,11 +28,7 @@ class Main extends Component {
     }
 
     getAll() {
-        if(this.props.pokemons.length === this.props.size) {
-            this.props.hasMore(false);
-            return;
-        }
-
+        if (this.props.hasMore === false) return;
         this.props.getAll(this.props.page, this.state.load);
     }
 

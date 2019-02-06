@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { caughtLength } from '../../routes/routes';
 import CardCollection from '../cards/cardCollection';
 import InfiniteScroll from '../InfiniteScroll';
 
@@ -8,25 +7,17 @@ class PokeCollection extends Component {
         super();
         this.state = {
             load: 20,
-            hasMore: true,
-            length: 0
         }
     }
 
     componentDidMount(){   
-        caughtLength()
-            .then((length) => this.setState({length: length}))
-            .then(() => this.getAllCaught());
+        this.props.getLength();
+        this.getAllCaught();
     }
 
     getAllCaught() {
-        if(this.props.pokemons.length === this.state.length) {
-            this.setState({hasMore: false});
-            return;
-        }
-        const path = 'caught?';
-        this.props.checkPath(path);
-        this.props.getAllCaught(path, this.props.page, this.state.load);
+        if (this.props.hasMore === false) return;
+        this.props.getAllCaught(this.props.page, this.state.load);
     }
 
     render() {
@@ -36,7 +27,7 @@ class PokeCollection extends Component {
                 <InfiniteScroll
                     error={this.props.error}
                     isLoading={this.props.isLoading}
-                    hasMore={this.state.hasMore}
+                    hasMore={this.props.hasMore}
                     fetchData={this.getAllCaught.bind(this)}
                 >
                 <div className="d-flex justify-content-around align-items-center flex-wrap">
