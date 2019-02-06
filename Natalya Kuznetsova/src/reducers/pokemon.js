@@ -28,7 +28,8 @@ const pokemonReducer = (state = initState, action) => {
                 pokemon: {
                     id: action.pokemon.id,
                     name: action.pokemon.name,
-                    date: action.pokemon.caught[0].date
+                    date: (action.pokemon.caught.length !== 0) ? 
+                        action.pokemon.caught[0].date : ''
                 }
             }
         default:

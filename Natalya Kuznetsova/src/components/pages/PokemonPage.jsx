@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { getPokemon } from '../../routes/routes';
 import CardInfo from '../cards/cardInfo';
 
 class PokeCard extends Component {
@@ -10,25 +9,6 @@ class PokeCard extends Component {
     componentDidMount(){
         this.props.getPokemon(this.props.match.params.id);
     }
-
-    /*getPoke(id) {
-        getPokemon(id).then(data => {
-            this.setState({
-                id: data.id,
-                name: data.name
-            });
-
-            return data.caught;
-        }).then(caught => {
-            if (caught.length === 0) {
-                return
-            } else {
-                this.setState({
-                    date: caught[0].date
-                });
-            }
-        });  
-    }*/
 
     render() {
         return(
