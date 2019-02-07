@@ -28,7 +28,7 @@ class Main extends Component {
     }
 
     getAll() {
-        if (this.props.hasMore === false) return;
+        if (!this.props.hasMore) return;
         this.props.getAll(this.props.page, this.state.load);
     }
 

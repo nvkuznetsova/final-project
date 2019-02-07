@@ -5,7 +5,8 @@ export const actionTypes = {
     COLLECTION_HAS_ERROR: 'COLLECTION_HAS_ERROR',
     COLLECTION_LOADING_SUCCESS: 'COLLECTION_LOADING_SUCCESS',
     COLLECTION_ADD_PAGE: 'COLLECTION_ADD_PAGE',
-    COLLECTION_LENGTH: 'COLLECTION_LENGTH'
+    COLLECTION_LENGTH: 'COLLECTION_LENGTH',
+    COLLECTION_MORE: 'COLLECTION_MORE'
 }
 
 export const collectionHasError = (bool, msg) => {
@@ -37,6 +38,13 @@ export const collectionLoadingSuccess = (pokemons) => {
     };
 }
 
+export const collectionHasMore = (bool) => {
+    return {
+        type: actionTypes.COLLECTION_MORE,
+        hasMore: bool
+    }
+}
+
 export const collectionLength = (size) => {
     return {
         type: actionTypes.COLLECTION_LENGTH,
@@ -46,17 +54,14 @@ export const collectionLength = (size) => {
 
 export const getCollectionLength = () => {
     return (dispatch) => {
-        dispatch(collectionIsLoading(true));
 
         caughtLength()
             .then(size => {
                 dispatch(collectionLength(size))
             })
-            .then(() => dispatch(collectionIsLoading(false)))
             .catch((err) => {
                 console.log(err.message);
                 dispatch(collectionHasError(true, err.message));
-                dispatch(collectionIsLoading(false));
             });
     }
 }
@@ -67,10 +72,15 @@ export const getAllCaught = (page, limit) => {
         
         getCaught(page, limit)
             .then(pokemons => {
-                dispatch(collectionLoadingSuccess(pokemons));
+                if (pokemons.length !== 0) {
+                    dispatch(collectionHasMore(true));
+                    dispatch(collectionLoadingSuccess(pokemons));
+                    dispatch(collectionAddPage(page+1));
+                } else {
+                    dispatch(collectionHasMore(false));
+                }
             })
             .then(() => dispatch(collectionIsLoading(false)))
-            .then(() => dispatch(collectionAddPage(page+1)))
             .catch((err) => {
                 console.log(err.message);
                 dispatch(collectionHasError(true, err.message));

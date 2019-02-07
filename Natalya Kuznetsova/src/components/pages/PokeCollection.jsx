@@ -16,7 +16,7 @@ class PokeCollection extends Component {
     }
 
     getAllCaught() {
-        if (this.props.hasMore === false) return;
+        if (!this.props.hasMore) return;
         this.props.getAllCaught(this.props.page, this.state.load);
     }
 

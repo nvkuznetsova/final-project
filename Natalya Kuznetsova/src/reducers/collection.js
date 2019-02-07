@@ -1,5 +1,5 @@
 import { actionTypes } from '../actions/collection';
-import { CATCH_POKE } from '../actions/pokemons';
+import { CATCH_POKE } from '../actions/action-catch';
 const initState = {
     isLoading: false,
     error: false,
@@ -31,18 +31,16 @@ const collectionReducer = (state = initState, action) => {
                 ...state,
                 size: action.size
             }
+        case actionTypes.COLLECTION_MORE:
+            return {
+                ...state,
+                hasMore: action.hasMore
+            }
         case actionTypes.COLLECTION_LOADING_SUCCESS:
             if(state.pokemons.length !== 0) {
-                if(state.pokemons.length === state.size) {
-                    return {
-                        ...state, 
-                        hasMore: false
-                    }
-                } else {
-                    return {
-                        ...state, 
-                        pokemons: [...state.pokemons, ...action.pokemons]
-                    }
+                return {
+                    ...state, 
+                    pokemons: [...state.pokemons, ...action.pokemons]
                 }
             } else {
                 return {
@@ -51,7 +49,9 @@ const collectionReducer = (state = initState, action) => {
                 }
             } 
         case CATCH_POKE: 
-            return initState;    
+            if (CATCH_POKE.isCaught) {
+                return initState;
+            }    
         default:
             return state;
     }

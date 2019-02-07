@@ -1,13 +1,13 @@
-import { getAllPokemons, allLength, catchPokemon } from '../routes/routes';
+import { getAllPokemons, allLength } from '../routes/routes';
 
 export const actionTypes = {
     DATA_IS_LOADING: 'DATA_IS_LOADING',
     DATA_HAS_ERROR: 'DATA_HAS_ERROR',
     DATA_LOADING_SUCCESS: 'DATA_LOADING_SUCCESS',
     ADD_PAGE: 'ADD_PAGE',
-    SET_LENGTH: 'SET_LENGTH'
+    SET_LENGTH: 'SET_LENGTH',
+    HAS_MORE: 'HAS_MORE'
 }
-export const CATCH_POKE = 'CATCH_POKE';
 
 export const dataHasError = (bool, msg) => {
     return {
@@ -45,26 +45,23 @@ export const setLength = (size) => {
     };
 }
 
-export const catchPoke = (bool) => {
+export const hasMore = (bool) => {
     return {
-        type: CATCH_POKE,
-        isCaught: bool
+        type: actionTypes.HAS_MORE,
+        hasMore: bool
     }
 }
 
 export const getLength = () => {
     return (dispatch) => {
-        dispatch(dataIsLoading(true));
 
         allLength()
             .then(size => {
                 dispatch(setLength(size))
             })
-            .then(() => dispatch(dataIsLoading(false)))
             .catch((err) => {
                 console.log(err.message);
                 dispatch(dataHasError(true, err.message));
-                dispatch(dataIsLoading(false));
             });
     }
 }
@@ -72,25 +69,22 @@ export const getLength = () => {
 export const getAll = (page, limit) => {
     return (dispatch) => {
         dispatch(dataIsLoading(true));
-        
+
         getAllPokemons(page, limit)
             .then(pokemons => {
-                dispatch(dataLoadingSuccess(pokemons));
+                if (pokemons.length !== 0) {
+                    dispatch(hasMore(true));
+                    dispatch(dataLoadingSuccess(pokemons));
+                    dispatch(addPage(page+1));
+                } else {
+                    dispatch(hasMore(false));
+                }
             })
             .then(() => dispatch(dataIsLoading(false)))
-            .then(() => dispatch(addPage(page+1)))
             .catch((err) => {
                 console.log(err.message);
                 dispatch(dataHasError(true, err.message));
                 dispatch(dataIsLoading(false));
             });
     };
-}
-
-export const catchedPokemon = (poke) => {
-    return (dispatch) => {
-        dispatch(catchPoke(true));
-        catchPokemon(poke);
-        dispatch(catchPoke(false));       
-    }
 }

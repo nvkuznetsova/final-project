@@ -1,6 +1,7 @@
 import Main from '../components/pages/MainPage';
 import { connect } from 'react-redux';
-import { getAll, getLength, catchedPokemon } from '../actions/pokemons';
+import { getAll, getLength } from '../actions/pokemons';
+import { catchedPokemon } from '../actions/action-catch';
 
 const mapStateToProps = (state) => ({
     isLoading: state.pokemonsReducer.isLoading,
