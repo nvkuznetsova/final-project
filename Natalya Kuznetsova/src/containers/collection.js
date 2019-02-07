@@ -7,7 +7,6 @@ const mapStateToProps = (state) => ({
     error: state.collectionReducer.error,
     pokemons: state.collectionReducer.pokemons,
     page: state.collectionReducer.page,
-    size: state.collectionReducer.size,
     hasMore: state.collectionReducer.hasMore
 });
 

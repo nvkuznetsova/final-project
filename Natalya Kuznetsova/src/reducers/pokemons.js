@@ -30,16 +30,13 @@ const pokemonsReducer = (state = initState, action) => {
                 ...state,
                 size: action.size
             }
-        case actionTypes.HAS_MORE:
-            return {
-                ...state,
-                hasMore: action.hasMore
-            }
         case actionTypes.DATA_LOADING_SUCCESS:
             if(state.pokemons.length !== 0) {
                 return {
                     ...state, 
-                    pokemons: [...state.pokemons, ...action.pokemons]
+                    pokemons: [...state.pokemons, ...action.pokemons],
+                    hasMore: ((state.pokemons.length + action.pokemons.length) !== state.size) ? 
+                        true : false
                 }
             } else {
                 return {

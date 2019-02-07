@@ -5,8 +5,7 @@ export const actionTypes = {
     COLLECTION_HAS_ERROR: 'COLLECTION_HAS_ERROR',
     COLLECTION_LOADING_SUCCESS: 'COLLECTION_LOADING_SUCCESS',
     COLLECTION_ADD_PAGE: 'COLLECTION_ADD_PAGE',
-    COLLECTION_LENGTH: 'COLLECTION_LENGTH',
-    COLLECTION_MORE: 'COLLECTION_MORE'
+    COLLECTION_LENGTH: 'COLLECTION_LENGTH'
 }
 
 export const collectionHasError = (bool, msg) => {
@@ -38,12 +37,12 @@ export const collectionLoadingSuccess = (pokemons) => {
     };
 }
 
-export const collectionHasMore = (bool) => {
+/*export const collectionHasMore = (bool) => {
     return {
         type: actionTypes.COLLECTION_MORE,
         hasMore: bool
     }
-}
+}*/
 
 export const collectionLength = (size) => {
     return {
@@ -72,13 +71,8 @@ export const getAllCaught = (page, limit) => {
         
         getCaught(page, limit)
             .then(pokemons => {
-                if (pokemons.length !== 0) {
-                    dispatch(collectionHasMore(true));
-                    dispatch(collectionLoadingSuccess(pokemons));
-                    dispatch(collectionAddPage(page+1));
-                } else {
-                    dispatch(collectionHasMore(false));
-                }
+                dispatch(collectionLoadingSuccess(pokemons));
+                dispatch(collectionAddPage(page+1));
             })
             .then(() => dispatch(collectionIsLoading(false)))
             .catch((err) => {

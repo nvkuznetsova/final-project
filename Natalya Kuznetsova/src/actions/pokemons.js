@@ -5,8 +5,7 @@ export const actionTypes = {
     DATA_HAS_ERROR: 'DATA_HAS_ERROR',
     DATA_LOADING_SUCCESS: 'DATA_LOADING_SUCCESS',
     ADD_PAGE: 'ADD_PAGE',
-    SET_LENGTH: 'SET_LENGTH',
-    HAS_MORE: 'HAS_MORE'
+    SET_LENGTH: 'SET_LENGTH'
 }
 
 export const dataHasError = (bool, msg) => {
@@ -45,13 +44,6 @@ export const setLength = (size) => {
     };
 }
 
-export const hasMore = (bool) => {
-    return {
-        type: actionTypes.HAS_MORE,
-        hasMore: bool
-    }
-}
-
 export const getLength = () => {
     return (dispatch) => {
 
@@ -72,13 +64,8 @@ export const getAll = (page, limit) => {
 
         getAllPokemons(page, limit)
             .then(pokemons => {
-                if (pokemons.length !== 0) {
-                    dispatch(hasMore(true));
-                    dispatch(dataLoadingSuccess(pokemons));
-                    dispatch(addPage(page+1));
-                } else {
-                    dispatch(hasMore(false));
-                }
+                dispatch(dataLoadingSuccess(pokemons));
+                dispatch(addPage(page+1));
             })
             .then(() => dispatch(dataIsLoading(false)))
             .catch((err) => {

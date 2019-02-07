@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CardCollection from '../cards/cardCollection';
-import InfiniteScroll from '../InfiniteScroll';
+import BtnLoad from '../buttons/btnLoad';
 
 class PokeCollection extends Component {
     constructor() {
@@ -24,12 +24,6 @@ class PokeCollection extends Component {
         return(
             <div className="col-sm-12 col-md-12">
                 <h3 className="text-md-left text-sm-center mt-3 mb-3">My Pokemons</h3>
-                <InfiniteScroll
-                    error={this.props.error}
-                    isLoading={this.props.isLoading}
-                    hasMore={this.props.hasMore}
-                    fetchData={this.getAllCaught.bind(this)}
-                >
                 <div className="d-flex justify-content-around align-items-center flex-wrap">
                     {this.props.pokemons.map((poke, i) => (
                         <CardCollection 
@@ -40,7 +34,13 @@ class PokeCollection extends Component {
                         />
                     ))}
                 </div>
-                </InfiniteScroll>
+                <div className="col-md-4 mx-auto mb-3">
+                {(!this.props.hasMore) ? 
+                    <p className="text-center font-weight-bold">You seen all!</p>
+                    :
+                    <BtnLoad click={this.getAllCaught.bind(this)}/>
+                }
+                </div>
             </div>
         )
     }

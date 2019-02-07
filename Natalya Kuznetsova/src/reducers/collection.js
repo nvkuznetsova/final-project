@@ -31,16 +31,13 @@ const collectionReducer = (state = initState, action) => {
                 ...state,
                 size: action.size
             }
-        case actionTypes.COLLECTION_MORE:
-            return {
-                ...state,
-                hasMore: action.hasMore
-            }
         case actionTypes.COLLECTION_LOADING_SUCCESS:
             if(state.pokemons.length !== 0) {
                 return {
                     ...state, 
-                    pokemons: [...state.pokemons, ...action.pokemons]
+                    pokemons: [...state.pokemons, ...action.pokemons],
+                    hasMore: ((state.pokemons.length + action.pokemons.length) !== state.size) ? 
+                        true : false
                 }
             } else {
                 return {
