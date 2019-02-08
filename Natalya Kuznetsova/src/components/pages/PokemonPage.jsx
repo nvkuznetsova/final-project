@@ -19,7 +19,9 @@ class PokeCard extends Component {
                     id={this.props.pokemon.id}
                     name={this.props.pokemon.name}
                     date={this.props.pokemon.date}
-                />         
+                />
+                {this.props.isLoading && <p className="text-center font-weight-bold">Loading...</p>}
+                {this.props.error && <p className="text-center text-uppercase text-danger">An error occured!</p>}         
             </div>
         )
     }

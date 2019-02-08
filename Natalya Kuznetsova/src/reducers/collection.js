@@ -46,9 +46,7 @@ const collectionReducer = (state = initState, action) => {
                 }
             } 
         case CATCH_POKE: 
-            if (CATCH_POKE.isCaught) {
-                return initState;
-            }    
+            return initState;    
         default:
             return state;
     }

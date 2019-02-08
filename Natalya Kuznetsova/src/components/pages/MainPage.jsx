@@ -24,6 +24,7 @@ class Main extends Component {
         ev.target.classList.add('btn-secondary');
         ev.target.textContent = 'You caught me!';
         this.props.catchPokemon(poke);
+        poke.caught.push(1);
     }
 
     getAll() {
@@ -49,8 +50,11 @@ class Main extends Component {
                     <div className="col-md-4 mx-auto mb-3">
                         {(!this.props.hasMore) ? 
                             <p className="text-center font-weight-bold">You seen all!</p>
-                        :
-                            <BtnLoad click={this.getAll.bind(this)}/>
+                        : 
+                            <BtnLoad 
+                                click={this.getAll.bind(this)} 
+                                isLoading={this.props.isLoading}
+                                error={this.props.error}/>
                         }
                         
                     </div>
