@@ -12,6 +12,7 @@ class PokeCollection extends Component {
 
     componentDidMount(){   
         this.props.getLength();
+        if(this.props.page === 1)
         this.getAllCaught();
     }
 

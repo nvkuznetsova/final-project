@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CardAll from '../cards/cardAll';
 import BtnLoad from '../buttons/btnLoad';
-import PropTypes from 'prop-types';
 
 
 class Main extends Component {
@@ -14,6 +13,7 @@ class Main extends Component {
 
     componentDidMount(){   
         this.props.getLength();
+        if (this.props.page === 1)
         this.getAll();
     }
 
@@ -62,13 +62,5 @@ class Main extends Component {
         )
     }
 }
-
-/*Main.propTypes = {
-    getAll: PropTypes.func.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    error: PropTypes.bool.isRequired,
-    page: PropTypes.number.isRequired,
-    pokemons: PropTypes.array.isRequired
-  }*/
 
 export default Main;
