@@ -12,9 +12,10 @@ class Main extends Component {
     }
 
     componentDidMount(){   
-        this.props.getLength();
-        if (this.props.page === 1)
-        this.getAll();
+        if (this.props.page === 1) {
+            this.props.getLength();
+            this.getAll();
+        }
     }
 
     onCatch(poke, ev) {
@@ -24,7 +25,7 @@ class Main extends Component {
         ev.target.classList.add('btn-secondary');
         ev.target.textContent = 'You caught me!';
         this.props.catchPokemon(poke);
-        poke.caught.push(1);
+        poke.caught.push(true);
     }
 
     getAll() {
