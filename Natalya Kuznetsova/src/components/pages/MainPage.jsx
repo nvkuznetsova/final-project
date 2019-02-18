@@ -20,10 +20,6 @@ class Main extends Component {
 
     onCatch(poke, ev) {
         ev.preventDefault();
-        ev.target.setAttribute('disabled', 'true');
-        ev.target.classList.remove('btn-primary');
-        ev.target.classList.add('btn-secondary');
-        ev.target.textContent = 'You caught me!';
         this.props.catchPokemon(poke);
         poke.caught.push(true);
     }
